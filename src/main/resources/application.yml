@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: "@spring.profiles.active@"
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+      hibernate.enable_lazy_load_no_trans: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+logging:
+  level:
+    web: DEBUG
+    org:
+      hibernate:
+        sql: DEBUG
+  file:
+    name: app.log
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/coiffure?serverTimezone=UTC
+    username: root
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:h2:mem:testdb
+    platform: h2
